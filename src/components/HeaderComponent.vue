@@ -1,15 +1,16 @@
 <template>
-  <div class="header is-flex py-5 pr-6 pl-4 is-justify-content-space-between">
+  <header class="header is-flex py-5 pr-6 pl-4 is-justify-content-space-between">
     <img class="header__logo" src="@/assets/images/logo.png" />
     <div class="is-flex is-align-items-center" style="gap: 5rem;">
       <LoggedUserComponent />
-      <img class="header__icon" src="@/assets/icons/logout.svg"  @mouseover="expandIcon" @mouseout="shrinkIcon" />
+      <img class="header__icon" src="@/assets/icons/logout.svg"  ref="iconRef" />
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
 import LoggedUserComponent from './LoggedUserComponent.vue';
+import { iconExpand } from '@/utils';
 
 export default {
   name: 'HeaderComponent',
@@ -17,21 +18,12 @@ export default {
     LoggedUserComponent,
   },
 
-  data() {
-    return {
-      isIconExpanded: false,
+  mounted() {
+    const iconElement = this.$refs.iconRef
+    if (iconElement) {
+      iconExpand(iconElement);
     }
   },
-
-  methods: {
-    expandIcon() {
-      this.isIconExpanded = true
-    },
-
-    shrinkIcon() {
-      this.isIconExpanded = false
-    }
-  }
 }
 </script>
 
@@ -53,7 +45,6 @@ export default {
 
 .header__icon:hover {
   cursor: pointer;
-  filter: invert(64%) sepia(32%) saturate(1390%) hue-rotate(302deg) brightness(100%) contrast(104%);
-  transform: scale(1.2);
+  filter: var(--filtro-rosa)
 }
 </style>
