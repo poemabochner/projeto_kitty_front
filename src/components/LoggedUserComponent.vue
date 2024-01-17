@@ -1,7 +1,7 @@
 <template>
   <div class="usuario-logado is-flex py-3 pr-4 pl-3 is-align-items-center has-text-weight-semibold">
     <img class="usuario-logado__icon" src="@/assets/icons/user.svg"/>
-    <p>usuário</p>
+    <p>cliente</p>
   </div>
 </template>
 
