@@ -2,6 +2,7 @@
   <HeaderComponent />
   <main></main>
   <FooterComponent />
+  <router-view></router-view>
 </template>
 
 <script>
