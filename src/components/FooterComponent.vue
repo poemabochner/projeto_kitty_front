@@ -41,6 +41,9 @@ export default {
   background-color: var(--cor-hover);
   padding-right: 5rem;
   padding-left: 5rem;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 .footer__lado-esquerdo-icon {
