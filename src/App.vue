@@ -17,7 +17,7 @@ export default {
 <style>
   :root {
     --cor-principal: #FFAEC2;
-    --cor-footer: #FE7596;
+    --cor-hover: #FE7596;
     --rosa-claro: #FFF2F2;
     --rosa-detalhes: #FF91AC;
     --branco: #FFFFFF;
@@ -33,5 +33,6 @@ export default {
   * { 
     margin: 0;
     padding: 0;
+    font-size: 1.25rem;
   }
 </style>
