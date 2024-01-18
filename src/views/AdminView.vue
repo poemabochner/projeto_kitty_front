@@ -1,7 +1,8 @@
 <template>
-  <div class="is-flex is-justify-content-center mt-6">
-    <DataTableComponent tableTitle="ingredientes" :tableData="tableData" />
+  <div class="is-flex is-justify-content-center mt-6 mb-6">
+    <DataTableComponent class="mb-5" tableTitle="ingredientes" :tableData="tableData" />
   </div>
+  <div></div>
 </template>
 
 <script>
@@ -14,6 +15,8 @@ export default {
   data() {
     return {
       tableData: [
+        { id: 'linguiça', name: 'R$: 2,99'},
+        { id: 'linguiça', name: 'R$: 2,99'},
         { id: 'linguiça', name: 'R$: 2,99'},
         { id: 'linguiça', name: 'R$: 2,99'},
         { id: 'linguiça', name: 'R$: 2,99'},
