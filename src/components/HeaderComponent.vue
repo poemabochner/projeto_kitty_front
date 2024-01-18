@@ -1,5 +1,5 @@
 <template>
-  <header class="header is-flex py-5 pr-6 pl-4 is-justify-content-space-between">
+  <header v-if="showHeader" class="header is-flex py-5 pr-6 pl-4 is-justify-content-space-between">
     <img class="header__logo" src="@/assets/images/logo.png" />
     <div class="is-flex is-align-items-center" style="gap: 5rem;">
       <LoggedUserComponent />
@@ -18,11 +18,25 @@ export default {
     LoggedUserComponent,
   },
 
-  mounted() {
-    const iconElement = this.$refs.iconRef
-    if (iconElement) {
-      iconExpand(iconElement);
-    }
+  beforeUpdate() {
+    this.$nextTick(() => {
+      this.addIconListeners();
+    });
+  },
+
+  methods: {
+    addIconListeners() {
+      const iconElement = this.$refs.iconRef;
+      if (iconElement) {
+        iconExpand(iconElement);
+      }
+    },
+  },
+
+  computed: {
+    showHeader() {
+      return this.$route.meta.showHeader
+    },
   },
 }
 </script>
