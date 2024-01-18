@@ -42,5 +42,7 @@ export default {
     margin: 0;
     padding: 0;
     font-size: 1.25rem;
+    font-family: var(--fonte-principal);
+    color: var(--branco);
   }
 </style>
