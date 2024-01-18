@@ -7,22 +7,28 @@
         </th>
       </tr>
     </thead>
-    <tbody class="">
-      <tr class="is-flex is-justify-content-space-between" v-for="(item, index) in tableData" :key="item.id"
-        :class="{ 'linha-par': index % 2 === 0, 'linha-impar': index % 2 !== 0 }">
-        <td>{{ item.id }}</td>
-        <td>{{ item.name }}</td>
-        <td class="is-flex" style="gap: 0.6rem;">
-          <img src="@/assets/icons/edit.svg" style="width: 26px; cursor: pointer;"/>
-          <img src="@/assets/icons/delete.svg" style="cursor: pointer;"/>
-        </td>
-      </tr>
-      <button>oiii</button>
+    <tbody class="is-flex is-flex-direction-column">
+      <div>
+        <tr class="is-flex is-justify-content-space-between" v-for="(item, index) in tableData" :key="item.id"
+          :class="{ 'linha-par': index % 2 === 0, 'linha-impar': index % 2 !== 0 }">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td class="is-flex" style="gap: 0.6rem;">
+            <img src="@/assets/icons/edit.svg" style="width: 26px; cursor: pointer;" />
+            <img src="@/assets/icons/delete.svg" style="cursor: pointer;" />
+          </td>
+        </tr>
+      </div>
+      <div class="is-flex is-justify-content-flex-end pr-1" style="background-color: var(--rosa-salmao); border-radius: 0 0 10px 10px;">
+        <ButtonComponent />
+      </div>
     </tbody>
   </table>
 </template>
 
 <script>
+import ButtonComponent from './ButtonComponent.vue';
+
 export default {
   props: {
     tableTitle: {
@@ -33,8 +39,13 @@ export default {
       type: Array,
       required: true
     }
+  },
+
+  components: {
+    ButtonComponent,
   }
-};
+
+}
 </script>
 
 <style scoped>
