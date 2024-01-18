@@ -1,5 +1,5 @@
 <template>
-  <footer v-if="showFooter" class="footer py-5 is-flex is-justify-content-space-between has-text-weight-semibold">
+  <footer v-if="showFooter" class="footer py-4 is-flex is-justify-content-space-between has-text-weight-semibold">
     <div class="footer__lado-esquerdo is-flex is-align-items-center" style="gap: 2rem;">
       <img class="footer__lado-esquerdo-icon" src="@/assets/icons/instagram.svg" alt="ícone do instagram"
         ref="iconRef1" />
@@ -63,6 +63,7 @@ export default {
 
 .footer__lado-esquerdo-icon {
   transition: transform 0.3s ease;
+  width: 30px;
 }
 
 .footer__lado-esquerdo-icon:hover {

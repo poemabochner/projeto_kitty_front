@@ -1,5 +1,5 @@
 <template>
-  <header v-if="showHeader" class="header is-flex py-5 pr-6 pl-4 is-justify-content-space-between">
+  <header v-if="showHeader" class="header is-flex py-2 pr-6 pl-4 is-justify-content-space-between">
     <img class="header__logo" src="@/assets/images/logo.png" />
     <div class="is-flex is-align-items-center" style="gap: 5rem;">
       <LoggedUserComponent />
@@ -48,7 +48,7 @@ export default {
 }
 
 .header__logo {
-  width: 150px;
+  width: 100px;
 }
 
 .header__icon {
