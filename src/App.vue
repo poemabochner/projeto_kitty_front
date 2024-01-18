@@ -24,6 +24,7 @@ export default {
   --cor-hover: #FE7596;
   --rosa-claro: #FFF2F2;
   --rosa-detalhes: #FF91AC;
+  --rosa-salmao: #F9E2DB;
   --branco: #FFFFFF;
   --branco-azulado: #F0FCFF;
   --preto-principal: #424242;
