@@ -1,7 +1,10 @@
 <template>
+  <body style="position: relative; min-height: 100vh; display: flex;
+  flex-direction: column;">
   <HeaderComponent />
   <router-view></router-view>
   <FooterComponent />
+  </body>
 </template>
 
 <script>
@@ -22,6 +25,7 @@ export default {
 :root {
   --cor-principal: #FFAEC2;
   --cor-hover: #FE7596;
+  --rosa-escuro: #ff6287;
   --rosa-claro: #FFF2F2;
   --rosa-detalhes: #FF91AC;
   --rosa-salmao: #F9E2DB;
