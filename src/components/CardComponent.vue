@@ -3,13 +3,7 @@
     <div class="card__texto p-4">
       <p>{{ texto }}</p>
     </div>
-
-    <div class="card-image">
-      <figure class="image">
-        <slot></slot>
-      </figure>
-    </div>
-
+    <slot></slot>
   </div>
 </template>
 
@@ -31,7 +25,7 @@ export default {
   width: 12rem;
 }
 
-.card:hover{
+.card:hover {
   cursor: pointer;
 }
 </style>
