@@ -4,15 +4,16 @@
       <div class="modal-background"></div>
       <div class="modal-card has-text-centered" @click.stop>
         <header class="is-flex is-justify-content-center modal-card-head has-text-weight-semibold" style="gap:1rem">
-          <img src="@/assets/icons/hotdog.svg"/>
-          <h1 class="is-size-3">faça seu pedido!</h1>
+          <slot></slot>
+          <h1 class="is-size-3">{{ title }}</h1>
         </header>
-        <section class="modal-card-body has-text-weight-semibold">
-          <p>AAAAAAAAAAAAAAA</p>
+        <section class="modal-card-body">
+          <slot name="content">
+          </slot>
         </section>
-        <footer class="modal-card-foot has-text-weight-semibold has-text-right">
-          <p>Total - R$: 12,99</p>
-        </footer>
+          <footer class="modal-card-foot has-text-weight-semibold has-text-right">
+            <p>{{ text }}</p>
+          </footer>
         <button class="modal-close" @click="closeModal">Fechar Modal</button>
       </div>
     </div>
@@ -24,7 +25,13 @@ export default {
   props: {
     isModalActive: {
       type: Boolean,
-      required: true
+      required: true,
+    },
+    title: {
+      type: String
+    },
+    text: {
+      type: String
     }
   },
   methods: {
@@ -37,12 +44,11 @@ export default {
 
 <style scoped>
 .modal {
-
-  position: fixed;
+  /* position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100%; */
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -62,7 +68,7 @@ p {
   background-color: var(--cor-hover);
 }
 
-.modal-card-body{
+.modal-card-body {
   background-color: var(--rosa-claro);
 }
 
