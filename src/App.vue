@@ -40,6 +40,7 @@ export default {
   --filtro-rosa: invert(64%) sepia(32%) saturate(1390%) hue-rotate(302deg) brightness(100%) contrast(104%);
   --filtro-rosa-claro: invert(3%) sepia(1%) saturate(3313%) hue-rotate(271deg) brightness(93%) contrast(124%);
   --filtro-branco-azulado: invert(11%) sepia(69%) saturate(1865%) hue-rotate(177deg) brightness(110%) contrast(105%);
+  --filtro-rosa-escuro: invert(40%) sepia(75%) saturate(1762%) hue-rotate(312deg) brightness(104%) contrast(107%);
 }
 
 * {
