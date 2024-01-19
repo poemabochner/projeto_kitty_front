@@ -1,10 +1,18 @@
 <template>
   <div>
-    <ModalComponent :isModalActive="isModalActive" @closeModal="closeModal"></ModalComponent>
+    <ModalComponent :isModalActive="isModalActive" title="faça seu pedido!" text="Total - R$:13,00" @closeModal="closeModal">
+      <img src="@/assets/icons/hotdog.svg" />
+      <template v-slot:content>
+        <p class=" has-text-weight-semibold">AAAAAAAAAAAAA000</p>
+      </template>
+    </ModalComponent>
     <div class="is-flex is-justify-content-center" style="gap: 3rem;">
-      <CardComponent texto="nossos lanches!" @click="openModal('lanche')"><img src="@/assets/images/cliente.jpg" /></CardComponent>
-      <CardComponent texto="nossas promoções!" @click="openModal('promocao')"><img src="@/assets/images/cliente.jpg" /></CardComponent>
-      <CardComponent texto="monte seu lanche!" @click="openModal('monteSeuLanche')"><img src="@/assets/images/cliente.jpg" /></CardComponent>
+      <CardComponent texto="nossos lanches!" @click="openModal('lanche')"><img src="@/assets/images/cliente.jpg" />
+      </CardComponent>
+      <CardComponent texto="nossas promoções!" @click="openModal('promocao')"><img src="@/assets/images/cliente.jpg" />
+      </CardComponent>
+      <CardComponent texto="monte seu lanche!" @click="openModal('monteSeuLanche')"><img
+          src="@/assets/images/cliente.jpg" /></CardComponent>
     </div>
   </div>
 </template>
@@ -29,14 +37,18 @@ export default {
   methods: {
     openModal(type) {
       this.isModalActive = true,
-      this.modalType = type
+        this.modalType = type
     },
     closeModal() {
       this.isModalActive = false,
-      this.modalType = null
+        this.modalType = null
     }
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+p {
+  color: var(--preto-principal);
+}
+</style>
