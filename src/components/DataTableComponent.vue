@@ -14,12 +14,13 @@
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
           <td class="is-flex" style="gap: 0.6rem;">
-            <img src="@/assets/icons/edit.svg" style="width: 26px; cursor: pointer;" />
-            <img src="@/assets/icons/delete.svg" style="cursor: pointer;" />
+            <img class="icons" src="@/assets/icons/edit.svg" style="width: 26px;" />
+            <img class="icons" src="@/assets/icons/delete.svg" />
           </td>
         </tr>
       </div>
-      <div class="is-flex is-justify-content-flex-end pr-1" style="background-color: var(--rosa-salmao); border-radius: 0 0 10px 10px;">
+      <div class="is-flex is-justify-content-flex-end pr-1"
+        style="background-color: var(--rosa-salmao); border-radius: 0 0 10px 10px;">
         <ButtonComponent />
       </div>
     </tbody>
@@ -76,5 +77,10 @@ th {
 
 .linha-impar {
   background-color: var(--rosa-claro);
+}
+
+.icons:hover {
+  cursor: pointer;
+  filter: var(--filtro-rosa-escuro);
 }
 </style>
