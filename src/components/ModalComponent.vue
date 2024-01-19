@@ -7,7 +7,7 @@
           <slot></slot>
           <h1 class="is-size-3">{{ title }}</h1>
         </header>
-        <section class="modal-card-body">
+        <section class="modal-card-body p-0">
           <slot name="content">
           </slot>
         </section>
