@@ -3,7 +3,7 @@
     <img class="header__logo" src="@/assets/images/logo.png" />
     <div class="is-flex is-align-items-center" style="gap: 5rem;">
       <LoggedUserComponent />
-      <img class="header__icon" src="@/assets/icons/logout.svg"  ref="iconRef" />
+      <img class="header__icon" src="@/assets/icons/logout.svg"  ref="iconRef" @click="$router.push('/login')"/>
     </div>
   </header>
 </template>
