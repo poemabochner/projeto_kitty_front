@@ -1,4 +1,5 @@
 <template>
+  <ToastComponent ref="toast" message="seja bem-vindo, $usuário!"/>
   <div>
     <ModalComponent :isModalActive="isModalActive" title="faça seu pedido!" text="Total - R$:13,00"
       @closeModal="closeModal">
@@ -54,6 +55,7 @@ import CardComponent from '@/components/CardComponent.vue';
 import ModalComponent from '@/components/ModalComponent.vue';
 import AccordionComponent from '@/components/AccordionComponent.vue';
 import CounterComponent from '@/components/CounterComponent.vue';
+import ToastComponent from '@/components/ToastComponent.vue';
 
 export default {
   name: 'ClientView',
@@ -62,6 +64,7 @@ export default {
     ModalComponent,
     AccordionComponent,
     CounterComponent,
+    ToastComponent
   },
   data() {
     return {
