@@ -1,12 +1,19 @@
 <template>
   <div class="button__container p-2 has-text-weight-semibold has-text-centered m-3">
-    adicionar
+    <slot></slot>
+    {{  textoBotao }}
   </div>
 </template>
 
 <script>
   export default {
     name: 'ButtonComponent',
+
+    props: {
+      textoBotao: {
+        type: String,
+      }
+    }
   }
 </script>
 
