@@ -6,11 +6,11 @@
     </div>
     <div class="login__inferior">
       <div class="is-flex" style="gap: 5rem; padding: 4rem;">
-        <a class="login__inferior-link p-3 mb-6 has-text-centered" >
-          <img class="login__inferior-image" src="@/assets/images/adm.jpg" @click="redirectAdm"/>
+        <a class="login__inferior-link p-3 mb-6 has-text-centered" @click="$router.push('/administrador')">
+          <img class="login__inferior-image" src="@/assets/images/adm.jpg" />
           <p class="link-text">administrador</p>
         </a>
-        <a class="login__inferior-link p-4 mb-6 has-text-centered" @click="redirectClient">
+        <a class="login__inferior-link p-4 mb-6 has-text-centered" @click="$router.push('/cliente')">
           <img class="login__inferior-image" src="@/assets/images/cliente.jpg" />
           <p class="link-text">cliente</p>
         </a>
@@ -25,12 +25,6 @@ export default {
   name: 'LoginComponent',
 
   methods: {
-    redirectAdm() {
-      this.$router.push('/administrador')
-    },
-    redirectClient() {
-      this.$router.push('/cliente')
-    }
   }
 }
 </script>
