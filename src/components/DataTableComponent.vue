@@ -21,7 +21,7 @@
       </div>
       <div class="is-flex is-justify-content-flex-end pr-1"
         style="background-color: var(--rosa-salmao); border-radius: 0 0 10px 10px;">
-        <ButtonComponent />
+        <ButtonComponent textoBotao="adicionar" />
       </div>
     </tbody>
   </table>
