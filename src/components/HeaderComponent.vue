@@ -3,7 +3,7 @@
     <img class="header__logo" src="@/assets/images/logo.png" />
     <div class="is-flex is-align-items-center" style="gap: 5rem;">
       <LoggedUserComponent />
-      <img class="header__icon" src="@/assets/icons/logout.svg"  ref="iconRef" @click="$router.push('/login')"/>
+      <img class="header__icon" ref="iconRef" src="@/assets/icons/logout.svg" @click="logout" />
     </div>
   </header>
 </template>
@@ -31,14 +31,20 @@ export default {
         iconExpand(iconElement);
       }
     },
+
+    logout() {
+      localStorage.clear();
+
+      this.$router.push('/login');
+    },
   },
 
   computed: {
     showHeader() {
-      return this.$route.meta.showHeader
+      return this.$route.meta.showHeader;
     },
   },
-}
+};
 </script>
 
 <style scoped>
@@ -59,6 +65,7 @@ export default {
 
 .header__icon:hover {
   cursor: pointer;
-  filter: var(--filtro-rosa)
+  filter: var(--filtro-rosa);
+  transform: scale(1.2);
 }
 </style>
