@@ -1,19 +1,27 @@
 <template>
-  <SidebarComponent/>
-  <div class="is-flex is-justify-content-center mt-4 mb-6">
-    <DataTableComponent class="mb-5" tableTitle="ingredientes" :tableData="tableData" />
+<ToastComponent ref="toast" message="seja bem-vindo, $usuário!"/>
+  <div class="is-flex is-justify-content-space-between">
+    <aside>
+      <SidebarComponent />
+    </aside>
+    <div class="is-flex is-justify-content-center mt-4 mb-6">
+      <DataTableComponent class="mb-5" tableTitle="ingredientes" :tableData="tableData" />
+    </div>
+    <div>
+    </div>
   </div>
-  <div></div>
 </template>
 
 <script>
 import DataTableComponent from '@/components/DataTableComponent.vue';
 import SidebarComponent from '@/components/SidebarComponent.vue';
+import ToastComponent from '@/components/ToastComponent.vue';
 
 export default {
   components: {
-    DataTableComponent, 
-    SidebarComponent
+    DataTableComponent,
+    SidebarComponent,
+    ToastComponent
   },
   data() {
     return {
