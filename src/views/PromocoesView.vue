@@ -1,13 +1,14 @@
 <template>
-  <SidebarComponent/>
-  <div>
-    <BannerComponent titulo="promoções">
-      <div class="is-flex mt-4" style="gap: 3rem;">
-        <CardComponent texto="Completo + refrigerante 300ml">
+  <div class="is-flex">
+    <SidebarComponent />
+    <div class="mb-6 is-flex is-flex-grow-1 is-flex-direction-column is-justify-content-center">
+      <BannerComponent titulo="promoções">
+        <div class="columns is-flex is-justify-content-center mt-4" style="gap: 3rem;">
+          <CardComponent texto="completo + refrigerante 300ml">
           <div class="is-flex is-flex-direction-column p-2"
             style="background-color: var(--rosa-claro); border-radius: 0 0 9px 9px;">
-            <p class="is-size-6 is-align-self-flex-start">
-              Cachorro quente completo + refrigerante
+            <p class="is-size-5 is-align-self-flex-start">
+              cachorro quente completo + refrigerante
             </p>
             <p class="is-align-self-flex-end has-text-weight-bold p-4">R$: 8,90</p>
             <div class="is-flex p-2 is-align-self-flex-end">
@@ -16,11 +17,11 @@
             </div>
           </div>
         </CardComponent>
-        <CardComponent texto="Completo + refrigerante 300ml">
+        <CardComponent texto="completo + refrigerante 300ml">
           <div class="is-flex is-flex-direction-column p-2"
             style="background-color: var(--rosa-claro); border-radius: 0 0 9px 9px;">
-            <p class="is-size-6 is-align-self-flex-start">
-              Cachorro quente completo + refrigerante
+            <p class="is-size-5 is-align-self-flex-start">
+              cachorro quente completo + refrigerante
             </p>
             <p class="is-align-self-flex-end has-text-weight-bold p-4">R$: 8,90</p>
             <div class="is-flex p-2 is-align-self-flex-end">
@@ -29,11 +30,11 @@
             </div>
           </div>
         </CardComponent>
-        <CardComponent texto="Completo + refrigerante 300ml">
+        <CardComponent texto="completo + refrigerante 300ml">
           <div class="is-flex is-flex-direction-column p-2"
             style="background-color: var(--rosa-claro); border-radius: 0 0 9px 9px;">
-            <p class="is-size-6 is-align-self-flex-start">
-              Cachorro quente completo + refrigerante
+            <p class="is-size-5 is-align-self-flex-start">
+              cachorro quente completo + refrigerante
             </p>
             <p class="is-align-self-flex-end has-text-weight-bold p-4">R$: 8,90</p>
             <div class="is-flex p-2 is-align-self-flex-end">
@@ -41,11 +42,11 @@
               <img class="icons" src="@/assets/icons/delete.svg" />
             </div>
           </div>
-        </CardComponent>
-
-      </div>
-      <ButtonComponent  textoBotao="adicionar" />
-    </BannerComponent>
+        </CardComponent> 
+        </div>
+        <ButtonComponent  textoBotao="adicionar" />
+      </BannerComponent>
+    </div>
   </div>
 </template>
 
