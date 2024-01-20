@@ -25,7 +25,4 @@ export default {
   width: 12rem;
 }
 
-.card:hover {
-  cursor: pointer;
-}
 </style>

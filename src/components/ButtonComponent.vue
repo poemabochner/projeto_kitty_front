@@ -1,5 +1,5 @@
 <template>
-  <div class="button__container p-2 has-text-weight-semibold has-text-centered m-3">
+  <div class="button__container is-flex is-justify-content-center p-2 has-text-weight-semibold has-text-centered m-3" style="gap: 4px;">
     <slot></slot>
     {{  textoBotao }}
   </div>

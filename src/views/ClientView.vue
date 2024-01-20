@@ -40,11 +40,11 @@
       </template>
     </ModalComponent>
     <div class="is-flex is-justify-content-center" style="gap: 3rem;">
-      <CardComponent texto="nossos lanches!" @click="openModal('lanche')"><img src="@/assets/images/lanche.jpg" />
+      <CardComponent class="card" texto="nossos lanches!" @click="openModal('lanche')"><img src="@/assets/images/lanche.jpg" />
       </CardComponent>
-      <CardComponent texto="nossas promoções!" @click="openModal('promocao')"><img src="@/assets/images/promocao.png" />
+      <CardComponent class="card" texto="nossas promoções!" @click="openModal('promocao')"><img src="@/assets/images/promocao.png" />
       </CardComponent>
-      <CardComponent texto="monte seu lanche!" @click="openModal('monteSeuLanche')"><img
+      <CardComponent class="card" texto="monte seu lanche!" @click="openModal('monteSeuLanche')"><img
           src="@/assets/images/ingredientes.jpg" /></CardComponent>
     </div>
   </div>
@@ -87,6 +87,9 @@ export default {
 </script>
 
 <style scoped>
+.card:hover {
+  cursor: pointer;
+}
 p {
   color: var(--preto-principal);
 }

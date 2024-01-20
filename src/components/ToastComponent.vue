@@ -3,7 +3,7 @@
     <div v-if="show" class="toast is-flex p-5 tag is-primary is-light is-large" style="gap: 4px;">
       <img src="@/assets/icons/oktoast.svg" style="width: 24px;" />
       {{ message }}
-
+      <progress class="progress is-small is-primary" max="100">15%</progress>
     </div>
   </transition>
 </template>
@@ -32,7 +32,7 @@ export default {
 
         setTimeout(() => {
           this.show = false;
-        }, 3000);
+        }, 1500);
       }
     },
   },
@@ -48,15 +48,28 @@ export default {
   top: 100px;
   right: 100px;
   z-index: 9999;
+  animation: fadeInOut 1.5s forwards;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 1.5s;
 }
 
-.fade-enter,
+.fade-enter {
+  opacity: 0;
+}
+
 .fade-leave-to {
   opacity: 0;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>

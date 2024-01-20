@@ -4,16 +4,12 @@
       <div class="modal-background"></div>
       <div class="modal-card has-text-centered" @click.stop>
         <header class="is-flex is-justify-content-center modal-card-head has-text-weight-semibold" style="gap:1rem">
-          <slot></slot>
-          <h1 class="is-size-3">{{ title }}</h1>
+          <h1 class="is-size-5 has-text-weight-semibold">{{ title }}</h1>
         </header>
         <section class="modal-card-body p-0">
           <slot name="content">
           </slot>
         </section>
-          <footer class="modal-card-foot has-text-weight-semibold has-text-right">
-            <p>{{ text }}</p>
-          </footer>
         <button class="modal-close" @click="closeModal">Fechar Modal</button>
       </div>
     </div>
@@ -61,6 +57,7 @@ p {
 .modal-card {
   border-radius: 10px;
   position: relative;
+  width: 22rem;
 }
 
 .modal-card-head {

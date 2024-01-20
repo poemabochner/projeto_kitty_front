@@ -1,8 +1,8 @@
 <template>
   <div class="is-flex m-3 is-flex-direction-column" style="gap: 0.7rem;">
-    <div class="sidebar-img-container" @click="$router.push('/administrador')" title="Administrador">
+    <div class="sidebar-img-container" @click="$router.push('/administrador')" title="Ingredientes">
       <img class="sidebar-img p-2" src="@/assets/icons/ingredientes.svg" alt="">
-      <span class="tooltip">Administrador</span>
+      <span class="tooltip">Ingredientes</span>
     </div>
     <div class="sidebar-img-container" @click="$router.push('/lanches')" title="Lanches">
       <img class="sidebar-img p-2" src="@/assets/icons/lanches.svg" alt="">
