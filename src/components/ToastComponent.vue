@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div v-if="show" class="toast is-flex p-5 tag is-primary is-light is-large" style="gap: 4px;">
-      <img src="@/assets/icons/oktoast.svg" style="width: 24px;"/>
+      <img src="@/assets/icons/oktoast.svg" style="width: 24px;" />
       {{ message }}
 
     </div>
@@ -46,11 +46,8 @@ export default {
 .toast {
   position: fixed;
   top: 100px;
-  /* Ajuste a posição conforme necessário */
   right: 100px;
-  /* Ajuste a posição conforme necessário */
   z-index: 9999;
-  /* Garante que o Toast fique no topo */
 }
 
 .fade-enter-active,
@@ -61,4 +58,5 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}</style>
+}
+</style>
