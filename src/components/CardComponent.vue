@@ -1,7 +1,7 @@
 <template>
-  <div class="card has-text-weight-semibold has-text-centered my-5">
+  <div class="card has-text-weight-semibold has-text-centered my-5" style="border-radius: 12px;">
     <div class="card__texto p-4">
-      <p>{{ texto }}</p>
+      <h1 class="has-text-weight-semibold">{{ texto }}</h1>
     </div>
     <slot></slot>
   </div>
