@@ -4,8 +4,8 @@
       @closeModal="closeModal">
       <template v-slot:content>
         <div class="is-flex is-justify-content-center" style="gap:1px;">
-          <ButtonComponent textoBotao="Sim" @click="excluir"><img src="@/assets/icons/check.svg" /></ButtonComponent>
-          <ButtonComponent textoBotao="Cancelar" @click="cancelar"><img src="@/assets/icons/close.svg" />
+          <ButtonComponent textoBotao="sim" @click="excluir"><img src="@/assets/icons/check.svg" /></ButtonComponent>
+          <ButtonComponent textoBotao="cancelar" @click="cancelar"><img src="@/assets/icons/close.svg" />
           </ButtonComponent>
         </div>
       </template>
@@ -29,8 +29,8 @@
           </div>
 
           <div class="is-flex" style="gap: 1rem;">
-            <ButtonComponent textoBotao="Salvar" @click="salvar"><img src="@/assets/icons/check.svg" /></ButtonComponent>
-            <ButtonComponent textoBotao="Cancelar" @click="cancelar"><img src="@/assets/icons/close.svg" />
+            <ButtonComponent textoBotao="salvar" @click="salvar"><img src="@/assets/icons/check.svg" /></ButtonComponent>
+            <ButtonComponent textoBotao="cancelar" @click="cancelar"><img src="@/assets/icons/close.svg" />
             </ButtonComponent>
           </div>
         </div>
