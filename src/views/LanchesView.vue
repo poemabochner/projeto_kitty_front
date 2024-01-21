@@ -1,9 +1,12 @@
 <template>
   <div class="is-flex">
     <SidebarComponent />
+
     <div class="mb-6 is-flex is-flex-grow-1 is-flex-direction-column is-justify-content-center">
+
       <BannerComponent titulo="lanches">
         <div class="columns is-flex is-justify-content-center mt-4" style="gap: 3rem;">
+
           <CardComponent texto="completo com linguiça">
             <div class="is-flex is-flex-direction-column p-2"
               style="background-color: var(--rosa-claro); gap: 3rem; border-radius: 0 0 9px 9px;">
@@ -13,6 +16,7 @@
               <p class="is-align-self-flex-end has-text-weight-bold">R$: 5,90</p>
             </div>
           </CardComponent>
+          
           <CardComponent texto="completo com linguiça">
             <div class="is-flex is-flex-direction-column p-2"
               style="background-color: var(--rosa-claro); gap: 3rem; border-radius: 0 0 10px 10px;">
