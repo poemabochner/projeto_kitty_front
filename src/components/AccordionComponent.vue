@@ -2,7 +2,9 @@
   <div class="accordion" :class="{ 'is-expanded': isExpanded }">
     <div class="accordion-header" @click="toggleAccordion">
       <div class="accordion-title has-text-weight-semibold is-size-4">{{ title }}</div>
-      <div class="accordion-arrow" :class="{ 'is-rotated': isExpanded }" ><img style="width: 15px;" src="@/assets/icons/arrow.svg"/></div>
+      <div class="accordion-arrow" :class="{ 'is-rotated': isExpanded }">
+        <img style="width: 15px;" src="@/assets/icons/arrow.svg"/>
+      </div>
     </div>
     <div class="accordion-content" v-show="isExpanded">
       <slot></slot>
@@ -12,20 +14,19 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isExpanded: false,
-    };
-  },
   props: {
     title: {
       type: String,
       required: true,
     },
+    isExpanded: {
+      type: Boolean,
+      required: true,
+    },
   },
   methods: {
     toggleAccordion() {
-      this.isExpanded = !this.isExpanded;
+      this.$emit('toggleAccordion');
     },
   },
 };
