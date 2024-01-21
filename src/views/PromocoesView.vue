@@ -16,16 +16,70 @@
       <template v-slot:content>
         <div class="p-2 is-size-2 is-flex is-flex-direction-column" style="gap: 1rem;">
           <div class="">
-            <p>nome da promoção:</p>
-            <input class="input" v-model="nomePromocao" placeholder="nome" />
+            <h3>nome da promoção:</h3>
+            <input class="input" v-model="nomePromocao" placeholder="nome" maxlength="30"/>
+          </div>
+          <div class="">
+            <h3>descrição da promoção:</h3>
+            <input class="input" v-model="descriçãoPromocao" placeholder="descrição" maxlength="255"/>
+          </div>
+          <div class="">
+            <h3>lanches da promoção:</h3>
+            <div class="is-flex is-justify-content-space-between">
+              <p class="has-text-weight-regular is-size-5">completo com linguiça</p>
+              <p>
+                <CounterComponent />
+              </p>
+            </div>
           </div>
           <div>
-            <p>preço da promoção:</p>
-            <input class="input" @input="validarNumero" type="number" v-model="precoPromocao" placeholder="" />
+            <h3>preço da promoção:</h3>
+            <input class="input" @input="validarNumero" type="number" v-model="precoPromocao" placeholder="preço" />
           </div>
           <div>
-            <p>porcentagem do desconto:</p>
-            <input class="input" @input="validarNumero" type="number" v-model="porcentagemDesconto" placeholder="" />
+            <h3>porcentagem do desconto:</h3>
+            <input class="input" @input="validarNumero" type="number" v-model="porcentagemDesconto"
+              placeholder="porcentagem" />
+          </div>
+
+          <div class="is-flex" style="gap: 1rem;">
+            <ButtonComponent textoBotao="salvar" @click="salvar"><img src="@/assets/icons/check.svg" /></ButtonComponent>
+            <ButtonComponent textoBotao="cancelar" @click="cancelar"><img src="@/assets/icons/close.svg" />
+            </ButtonComponent>
+          </div>
+        </div>
+      </template>
+    </ModalShortComponent>
+
+    <ModalShortComponent v-else-if="modalType === 'editar'" :isModalActive="isModalActive" :title="modalTitle"
+      @closeModal="closeModal">
+      <template v-slot:content>
+        <div class="p-2 is-size-2 is-flex is-flex-direction-column" style="gap: 1rem;">
+          <div class="">
+            <h3>nome da promoção:</h3>
+            <input class="input" v-model="nomePromocao" placeholder="nome" maxlength="30"/>
+          </div>
+          <div class="">
+            <h3>descrição da promoção:</h3>
+            <input class="input" v-model="descriçãoPromocao" placeholder="descrição" maxlength="255"/>
+          </div>
+          <div class="">
+            <h3>lanches da promoção:</h3>
+            <div class="is-flex is-justify-content-space-between">
+              <p class="has-text-weight-regular is-size-5">completo com linguiça</p>
+              <p>
+                <CounterComponent />
+              </p>
+            </div>
+          </div>
+          <div>
+            <h3>preço da promoção:</h3>
+            <input class="input" @input="validarNumero" type="number" v-model="precoPromocao" placeholder="preço" />
+          </div>
+          <div>
+            <h3>porcentagem do desconto:</h3>
+            <input class="input" @input="validarNumero" type="number" v-model="porcentagemDesconto"
+              placeholder="porcentagem" />
           </div>
 
           <div class="is-flex" style="gap: 1rem;">
@@ -39,9 +93,11 @@
 
     <div class="is-flex">
       <SidebarComponent />
+
       <div class="mb-6 is-flex is-flex-grow-1 is-flex-direction-column is-justify-content-center">
         <BannerComponent titulo="promoções">
           <div class="columns is-flex is-justify-content-center mt-4" style="gap: 3rem;">
+
             <CardComponent texto="completo + refrigerante 300ml">
               <div class="is-flex is-flex-direction-column p-2"
                 style="background-color: var(--rosa-claro); border-radius: 0 0 9px 9px;">
@@ -50,13 +106,15 @@
                 </p>
                 <p class="is-align-self-flex-end has-text-weight-bold p-4">R$: 8,90</p>
                 <div class="is-flex p-2 is-align-self-flex-end">
-                  <img class="icons" src="@/assets/icons/edit.svg" style="width: 26px;" />
+                  <img class="icons" src="@/assets/icons/edit.svg" @click="openModal('editar')" style="width: 26px;" />
                   <img class="icons" src="@/assets/icons/delete.svg" @click="openModal('excluir')" />
                 </div>
               </div>
             </CardComponent>
+
           </div>
           <ButtonComponent textoBotao="adicionar" @click="openModal('adicionar')" />
+
         </BannerComponent>
       </div>
     </div>
@@ -69,6 +127,7 @@ import CardComponent from '@/components/CardComponent.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 import SidebarComponent from '@/components/SidebarComponent.vue';
 import ModalShortComponent from '@/components/ModalShortComponent.vue';
+import CounterComponent from '@/components/CounterComponent.vue';
 
 export default {
   name: 'PromocoesView',
@@ -78,6 +137,7 @@ export default {
     ButtonComponent,
     SidebarComponent,
     ModalShortComponent,
+    CounterComponent
   },
   data() {
     return {
@@ -98,6 +158,8 @@ export default {
         this.modalTitle = `Deseja mesmo excluir a promoção ${this.nome}?`
       } else if (type === 'adicionar') {
         this.modalTitle = 'Adicionar Promoção'
+      } else if (type ==='editar') {
+        this.modalTitle = 'Editar Promoção'
       }
     },
     closeModal() {
@@ -131,6 +193,11 @@ export default {
 
 <style scoped>
 p {
+  color: var(--preto-principal);
+}
+
+h3 {
+  font-weight: 600;
   color: var(--preto-principal);
 }
 
