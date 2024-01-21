@@ -17,7 +17,7 @@
         <div class="p-2 is-size-2 is-flex is-flex-direction-column" style="gap: 1rem;">
           <div class="">
             <p>nome do ingrediente:</p>
-            <input class="input" v-model="nomeIngrediente" placeholder="nome" />
+            <input class="input" v-model="nomeIngrediente" placeholder="nome" maxlength="30"/>
           </div>
           <div>
             <p>preço do ingrediente:</p>
@@ -34,6 +34,31 @@
         </div>
       </template>
     </ModalShortComponent>
+
+    <ModalShortComponent v-else-if="modalType === 'editar'" :isModalActive="isModalActive" :title="modalTitle"
+      @closeModal="closeModal">
+      <template v-slot:content>
+        <div class="p-2 is-size-2 is-flex is-flex-direction-column" style="gap: 1rem;">
+          <div class="">
+            <p>nome do ingrediente:</p>
+            <input class="input" v-model="nomeIngrediente" placeholder="nome" maxlength="30"/>
+          </div>
+          <div>
+            <p>preço do ingrediente:</p>
+            <input class="input" type="number" @input="validarNumero" v-model="precoIngrediente" placeholder="preço" />
+          </div>
+          <div>
+          </div>
+
+          <div class="is-flex" style="gap: 1rem;">
+            <ButtonComponent textoBotao="salvar" @click="salvar"><img src="@/assets/icons/check.svg" /></ButtonComponent>
+            <ButtonComponent textoBotao="cancelar" @click="cancelar"><img src="@/assets/icons/close.svg" />
+            </ButtonComponent>
+          </div>
+        </div>
+      </template>
+    </ModalShortComponent>
+
   </div>
   <table>
       <thead>
@@ -50,7 +75,7 @@
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
           <td class="is-flex" style="gap: 0.6rem;">
-            <img class="icons" src="@/assets/icons/edit.svg" style="width: 26px;" />
+            <img class="icons" src="@/assets/icons/edit.svg" @click="openModal('editar')" style="width: 26px;" />
             <img class="icons" src="@/assets/icons/delete.svg" @click="openModal('excluir')" />
           </td>
         </tr>
@@ -100,6 +125,8 @@ export default {
         this.modalTitle = `Deseja mesmo excluir o ingrediente ${this.nome}?`
       } else if (type === 'adicionar') {
         this.modalTitle = 'Adicionar Ingrediente'
+      } else if(type === 'editar') {
+        this.modalTitle = 'Editar Ingrediente'
       }
     },
     closeModal() {
@@ -114,7 +141,7 @@ export default {
       this.closeModal()
     },
     salvar() {
-      console.log('Promoção salva:', {
+      console.log('Ingrediente salvo:', {
         nome: this.nomeIngrediente,
         preco: this.precoIngrediente,
         porcentagemDesconto: this.porcentagemDesconto,
