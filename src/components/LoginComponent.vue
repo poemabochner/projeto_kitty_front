@@ -6,7 +6,7 @@
     </div>
     <div class="login__inferior">
       <div class="is-flex" style="gap: 5rem; padding: 4rem;">
-        <a class="login__inferior-link p-3 mb-6 has-text-centered" @click="$router.push('/administrador')">
+        <a class="login__inferior-link p-3 mb-6 has-text-centered" @click="$router.push('/ingredientes')">
           <img class="login__inferior-image" src="@/assets/images/adm.jpg" />
           <p class="link-text">administrador</p>
         </a>
