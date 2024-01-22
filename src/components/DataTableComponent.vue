@@ -17,7 +17,7 @@
         <div class="p-2 is-size-2 is-flex is-flex-direction-column" style="gap: 1rem;">
           <div class="">
             <p>nome do ingrediente:</p>
-            <input class="input" v-model="nomeIngrediente" placeholder="nome" maxlength="30"/>
+            <input class="input" v-model="nomeIngrediente" placeholder="nome" maxlength="30" />
           </div>
           <div>
             <p>preço do ingrediente:</p>
@@ -41,7 +41,7 @@
         <div class="p-2 is-size-2 is-flex is-flex-direction-column" style="gap: 1rem;">
           <div class="">
             <p>nome do ingrediente:</p>
-            <input class="input" v-model="nomeIngrediente" placeholder="nome" maxlength="30"/>
+            <input class="input" v-model="nomeIngrediente" placeholder="nome" maxlength="30" />
           </div>
           <div>
             <p>preço do ingrediente:</p>
@@ -61,33 +61,34 @@
 
   </div>
   <table>
-      <thead>
-        <tr class="has-text-centered">
-          <th class="p-5" colspan="3">
-            <h2 class="is-size-3 has-text-weight-semibold">{{ tableTitle }}</h2>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="is-flex is-flex-direction-column">
+    <thead>
+      <tr class="has-text-centered">
+        <th class="p-5" colspan="3">
+          <h2 class="is-size-3 has-text-weight-semibold">{{ tableTitle }}</h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="is-flex is-flex-direction-column table-container">
 
-        <tr class="is-flex is-justify-content-space-between" v-for="(item, index) in tableData" :key="item.id"
-          :class="{ 'linha-par': index % 2 === 0, 'linha-impar': index % 2 !== 0 }">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td class="is-flex" style="gap: 0.6rem;">
-            <img class="icons" src="@/assets/icons/edit.svg" @click="openModal('editar')" style="width: 26px;" />
-            <img class="icons" src="@/assets/icons/delete.svg" @click="openModal('excluir')" />
-          </td>
-        </tr>
-        <div class="is-flex is-justify-content-flex-end pr-1"
-          style="background-color: var(--rosa-salmao); border-radius: 0 0 10px 10px;">
-          <ButtonComponent textoBotao="adicionar" @click="openModal('adicionar')"/>
-        </div>
-      </tbody>
-    </table>
+      <tr class="is-flex table-row" v-for="(ingrediente, index) in tableData" :key="ingrediente.id"
+        :class="{ 'linha-par': index % 2 === 0, 'linha-impar': index % 2 !== 0 }">
+        <td class="table-cell-maior">{{ ingrediente.nomeIngrediente }}</td>
+        <td class="table-cell">{{ ingrediente.precoIngrediente }}</td>
+        <td class="is-flex table-cell is-justify-content-flex-end" style="gap: 0.6rem;">
+          <img class="icons" src="@/assets/icons/edit.svg" @click="openModal('editar')" style="width: 26px;" />
+          <img class="icons" src="@/assets/icons/delete.svg" @click="openModal('excluir')" />
+        </td>
+      </tr>
+      <div class="is-flex is-justify-content-flex-end pr-2"
+        style="background-color: var(--rosa-salmao); border-radius: 0 0 10px 10px;">
+        <ButtonComponent textoBotao="adicionar" @click="openModal('adicionar')" />
+      </div>
+    </tbody>
+  </table>
 </template>
 
 <script>
+import ingredienteService from '@/services/ingredienteService';
 import ButtonComponent from './ButtonComponent.vue';
 import ModalShortComponent from './ModalShortComponent.vue';
 
@@ -101,10 +102,6 @@ export default {
       type: String,
       required: true
     },
-    tableData: {
-      type: Array,
-      required: true
-    }
   },
   data() {
     return {
@@ -114,6 +111,7 @@ export default {
       nomeIngrediente: '',
       precoIngrediente: '',
       porcentagemDesconto: '',
+      tableData: []
     };
   },
   methods: {
@@ -125,7 +123,7 @@ export default {
         this.modalTitle = `Deseja mesmo excluir o ingrediente ${this.nome}?`
       } else if (type === 'adicionar') {
         this.modalTitle = 'Adicionar Ingrediente'
-      } else if(type === 'editar') {
+      } else if (type === 'editar') {
         this.modalTitle = 'Editar Ingrediente'
       }
     },
@@ -154,6 +152,16 @@ export default {
         this.precoIngrediente = 0;
       }
     },
+    async carregarDados() {
+      try {
+        this.tableData = await ingredienteService.obterTodos()
+      } catch (error) {
+        console.error('Erro ao obter ingredientes:', error)
+      }
+    }
+  },
+  mounted() {
+    this.carregarDados();
   },
 }
 </script>
@@ -166,6 +174,29 @@ table {
   border-collapse: collapse;
   margin-top: 15px;
 }
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .table-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .table-cell-maior{
+    flex: 2;
+    min-width: 200px;
+    margin-right: 0.6rem;
+  }
+
+  .table-cell {
+    flex: 1;
+    margin-right: 0.6rem;
+  }
 
 th,
 td {

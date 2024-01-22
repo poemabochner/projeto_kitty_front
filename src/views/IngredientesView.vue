@@ -5,7 +5,7 @@
       <SidebarComponent />
     </aside>
     <div class="is-flex is-justify-content-center mt-4 mb-6">
-      <DataTableComponent class="mb-5" tableTitle="ingredientes" :tableData="tableData" />
+      <DataTableComponent class="mb-5" tableTitle="ingredientes"/>
     </div>
     <div>
     </div>
@@ -16,7 +16,6 @@
 import DataTableComponent from '@/components/DataTableComponent.vue';
 import SidebarComponent from '@/components/SidebarComponent.vue';
 import ToastComponent from '@/components/ToastComponent.vue';
-
 export default {
   components: {
     DataTableComponent,
@@ -25,17 +24,11 @@ export default {
   },
   data() {
     return {
-      tableData: [
-        { id: 'linguiça', name: 'R$: 2,99' },
-        { id: 'linguiça', name: 'R$: 2,99' },
-        { id: 'linguiça', name: 'R$: 2,99' },
-        { id: 'linguiça', name: 'R$: 2,99' },
-        { id: 'linguiça', name: 'R$: 2,99' },
-        { id: 'linguiça', name: 'R$: 2,99' },
-        { id: 'linguiça', name: 'R$: 2,99' },
-        { id: 'linguiça', name: 'R$: 2,99' },
-      ]
+      
     }
+  },
+
+  methods: {
   }
 }
 </script>
