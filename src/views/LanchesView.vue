@@ -5,46 +5,30 @@
     <div class="mb-6 is-flex is-flex-grow-1 is-flex-direction-column is-justify-content-center">
 
       <BannerComponent titulo="lanches">
-        <div class="columns is-flex is-justify-content-center mt-4" style="gap: 3rem;">
+        <div class="card-container is-flex is-flex-wrap is-justify-content-space-between mt-2" style="gap: 2rem;">
 
-          <CardComponent texto="completo com linguiça">
+          <CardComponent style="background-color: var(--rosa-claro);" v-for="lanche in lanches" :key="lanche.id"
+            :texto="lanche.nomeLanche">
             <div class="is-flex is-flex-direction-column p-2"
               style="background-color: var(--rosa-claro); gap: 3rem; border-radius: 0 0 9px 9px;">
-              <p class="is-align-self-flex-start">
-                esse lanche leva todos os ingredientes, menos a linguiça
+              <p class="is-align-self-flex-start" style="height: 60px;">
+                {{ lanche.descricaoLanche }}
               </p>
-              <p class="is-align-self-flex-end has-text-weight-bold">R$: 5,90</p>
+              <p class="is-align-self-flex-end has-text-weight-bold">{{ formatarPreco(lanche.precoLanche)}}</p>
             </div>
           </CardComponent>
-          
-          <CardComponent texto="completo com linguiça">
-            <div class="is-flex is-flex-direction-column p-2"
-              style="background-color: var(--rosa-claro); gap: 3rem; border-radius: 0 0 10px 10px;">
-              <p class="is-align-self-flex-start">
-                esse lanche leva todos os ingredientes, menos a linguiça
-              </p>
-              <p class="is-align-self-flex-end has-text-weight-bold">R$: 5,90</p>
-            </div>
-          </CardComponent>
-          <CardComponent texto="completo com linguiça">
-            <div class="is-flex is-flex-direction-column p-2"
-              style="background-color: var(--rosa-claro); gap: 3rem; border-radius: 0 0 10px 10px;">
-              <p class="is-align-self-flex-start">
-                esse lanche leva todos os ingredientes, menos a linguiça
-              </p>
-              <p class="is-align-self-flex-end has-text-weight-bold">R$: 5,90</p>
-            </div>
-          </CardComponent>
+
         </div>
       </BannerComponent>
     </div>
   </div>
 </template>
-
 <script>
 import CardComponent from '@/components/CardComponent.vue';
 import BannerComponent from '@/components/BannerComponent.vue';
 import SidebarComponent from '@/components/SidebarComponent.vue';
+import lancheService from '@/services/lancheService';
+import { formatarPreco } from '@/utils';
 
 export default {
   name: 'LanchesView',
@@ -53,11 +37,36 @@ export default {
     CardComponent,
     BannerComponent,
     SidebarComponent
+  },
+  data() {
+    return {
+      lanches: []
+    }
+  },
+  mounted() {
+    this.carregarLanches()
+  },
+  methods: {
+    async carregarLanches() {
+      try {
+        this.lanches = await lancheService.obterTodos()
+      } catch (error) {
+        console.error('Erro ao obter lanches:', error)
+      }
+    },
+    formatarPreco(valor){
+      return formatarPreco(valor)
+    },
   }
 }
 </script>
 
 <style scoped>
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 p {
   color: var(--preto-principal);
 }
