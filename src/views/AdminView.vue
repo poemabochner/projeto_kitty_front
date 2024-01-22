@@ -1,5 +1,5 @@
 <template>
-<ToastComponent ref="toast" message="seja bem-vindo, $usuário!"/>
+<ToastComponent ref="toast" message="seja bem-vindo, administrador!"><img src="@/assets/icons/oktoast.svg" style="width: 24px;" /></ToastComponent>
   <div class="is-flex is-justify-content-space-between">
     <aside>
       <SidebarComponent />
@@ -35,9 +35,9 @@ export default {
         { id: 'linguiça', name: 'R$: 2,99' },
         { id: 'linguiça', name: 'R$: 2,99' },
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped></style>
