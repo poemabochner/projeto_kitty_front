@@ -16,6 +16,7 @@
 import DataTableComponent from '@/components/DataTableComponent.vue';
 import SidebarComponent from '@/components/SidebarComponent.vue';
 import ToastComponent from '@/components/ToastComponent.vue';
+
 export default {
   components: {
     DataTableComponent,
