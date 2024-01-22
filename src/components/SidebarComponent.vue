@@ -41,7 +41,7 @@ export default {
   position: absolute;
   top: 0%;
   left: 0%;
-  transform: translateX(50%);
+  transform: translateX(35%);
   background-color: var(--rosa-claro);
   color: var(--preto-principal);
   border-radius: 5px;
