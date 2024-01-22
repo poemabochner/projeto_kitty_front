@@ -17,21 +17,23 @@
         <div class="p-2 is-size-2 is-flex is-flex-direction-column" style="gap: 1rem;">
           <div class="">
             <h3>nome da promoção:</h3>
-            <input class="input" v-model="nomePromocao" placeholder="nome" maxlength="30"/>
+            <input class="input" v-model="nomePromocao" placeholder="nome" maxlength="100" />
           </div>
           <div class="">
             <h3>descrição da promoção:</h3>
-            <input class="input" v-model="descriçãoPromocao" placeholder="descrição" maxlength="255"/>
+            <input class="input" v-model="descriçãoPromocao" placeholder="descrição" maxlength="255" />
           </div>
           <div class="">
-            <h3>lanches da promoção:</h3>
-            <div class="is-flex is-justify-content-space-between">
-              <p class="has-text-weight-regular is-size-5">completo com linguiça</p>
-              <p>
-                <CounterComponent />
-              </p>
-            </div>
-          </div>
+  <h3>lanches da promoção:</h3>
+  <div v-for="lanche in lanches" :key="lanche.id" class="is-flex is-justify-content-space-between">
+    <div class="is-flex is-align-items-center">
+      <p class="has-text-weight-regular is-size-5" style="flex-basis: 2; word-wrap: break-word;">{{ lanche.nomeLanche }}</p>
+    </div>
+    <div>
+      <CounterComponent />
+    </div>
+  </div>
+</div>
           <div>
             <h3>preço da promoção:</h3>
             <input class="input" @input="validarNumero" type="number" v-model="precoPromocao" placeholder="preço" />
@@ -57,11 +59,11 @@
         <div class="p-2 is-size-2 is-flex is-flex-direction-column" style="gap: 1rem;">
           <div class="">
             <h3>nome da promoção:</h3>
-            <input class="input" v-model="nomePromocao" placeholder="nome" maxlength="30"/>
+            <input class="input" v-model="nomePromocao" placeholder="nome" maxlength="100" />
           </div>
           <div class="">
             <h3>descrição da promoção:</h3>
-            <input class="input" v-model="descriçãoPromocao" placeholder="descrição" maxlength="255"/>
+            <input class="input" v-model="descriçãoPromocao" placeholder="descrição" maxlength="255" />
           </div>
           <div class="">
             <h3>lanches da promoção:</h3>
@@ -96,15 +98,16 @@
 
       <div class="mb-6 is-flex is-flex-grow-1 is-flex-direction-column is-justify-content-center">
         <BannerComponent titulo="promoções">
-          <div class="columns is-flex is-justify-content-center mt-4" style="gap: 3rem;">
+          <div class="card-container is-flex is-flex-wrap is-justify-content-space-between mt-4" style="gap: 3rem;">
 
-            <CardComponent texto="completo + refrigerante 300ml">
+            <CardComponent v-for="promocao in promocoes" :key="promocao.id" :texto="promocao.nomePromocao"
+              style="background-color: var(--rosa-claro);">
               <div class="is-flex is-flex-direction-column p-2"
                 style="background-color: var(--rosa-claro); border-radius: 0 0 9px 9px;">
                 <p class="is-size-5 is-align-self-flex-start">
-                  cachorro quente completo + refrigerante
+                  {{ promocao.descricaoPromocao }}
                 </p>
-                <p class="is-align-self-flex-end has-text-weight-bold p-4">R$: 8,90</p>
+                <p class="is-align-self-flex-end has-text-weight-bold p-4">{{ formatarPreco(promocao.precoPromocao) }}</p>
                 <div class="is-flex p-2 is-align-self-flex-end">
                   <img class="icons" src="@/assets/icons/edit.svg" @click="openModal('editar')" style="width: 26px;" />
                   <img class="icons" src="@/assets/icons/delete.svg" @click="openModal('excluir')" />
@@ -128,6 +131,9 @@ import ButtonComponent from '@/components/ButtonComponent.vue';
 import SidebarComponent from '@/components/SidebarComponent.vue';
 import ModalShortComponent from '@/components/ModalShortComponent.vue';
 import CounterComponent from '@/components/CounterComponent.vue';
+import promocaoService from '@/services/promocaoService';
+import { formatarPreco } from '@/utils';
+import lancheService from '@/services/lancheService';
 
 export default {
   name: 'PromocoesView',
@@ -147,9 +153,22 @@ export default {
       nomePromocao: '',
       precoPromocao: '',
       porcentagemDesconto: '',
-    };
+      promocoes: [],
+      lanches: []
+    }
+  },
+  mounted() {
+    this.carregarPromocoes(),
+      this.carregarLanches()
   },
   methods: {
+    async carregarPromocoes() {
+      try {
+        this.promocoes = await promocaoService.obterTodos()
+      } catch (error) {
+        console.error('Erro ao obter lanches:', error)
+      }
+    },
     openModal(type) {
       this.isModalActive = true
       this.modalType = type
@@ -158,7 +177,7 @@ export default {
         this.modalTitle = `Deseja mesmo excluir a promoção ${this.nome}?`
       } else if (type === 'adicionar') {
         this.modalTitle = 'Adicionar Promoção'
-      } else if (type ==='editar') {
+      } else if (type === 'editar') {
         this.modalTitle = 'Editar Promoção'
       }
     },
@@ -187,11 +206,27 @@ export default {
         this.precoPromocao = Math.max(this.precoPromocao, 0)
       }
     },
+    formatarPreco(valor) {
+      return formatarPreco(valor)
+    },
+    async carregarLanches() {
+      try {
+        this.lanches = await lancheService.obterTodos()
+      } catch (error) {
+        console.error('Erro ao obter lanches:', error)
+      }
+    },
   },
 }
 </script>
 
 <style scoped>
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 p {
   color: var(--preto-principal);
 }
