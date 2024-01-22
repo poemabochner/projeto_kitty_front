@@ -1,9 +1,8 @@
 <template>
   <transition name="fade">
-    <div v-if="show" class="toast is-flex p-5 tag is-primary is-light is-large" style="gap: 4px;">
-      <img src="@/assets/icons/oktoast.svg" style="width: 24px;" />
+    <div v-if="show" :class="toastClass" style="gap: 4px;">
+      <slot></slot>
       {{ message }}
-      <progress class="progress is-small is-primary" max="100">15%</progress>
     </div>
   </transition>
 </template>
@@ -19,25 +18,29 @@ export default {
     message: {
       type: String,
       required: true
-    }
+    },
+    toastClass: {
+      type: String,
+      default: "toast is-flex p-5 tag is-primary is-light is-large",
+    },
   },
   methods: {
     showAutomaticToast() {
-      const toastShown = localStorage.getItem('toastShown');
+      const toastShown = localStorage.getItem('toastShown')
 
       if (!toastShown) {
-        this.show = true;
+        this.show = true
 
-        localStorage.setItem('toastShown', 'true');
+        localStorage.setItem('toastShown', 'true')
 
         setTimeout(() => {
-          this.show = false;
-        }, 1500);
+          this.show = false
+        }, 1500)
       }
     },
   },
   mounted() {
-    this.showAutomaticToast();
+    this.showAutomaticToast()
   },
 }
 </script>
