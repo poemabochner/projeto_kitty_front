@@ -70,10 +70,10 @@
     </thead>
     <tbody class="is-flex is-flex-direction-column table-container">
 
-      <tr class="is-flex table-row" v-for="(ingrediente, index) in tableData" :key="ingrediente.id"
+      <tr class="is-flex table-row" v-for="(ingrediente, index) in ingredientes" :key="ingrediente.id"
         :class="{ 'linha-par': index % 2 === 0, 'linha-impar': index % 2 !== 0 }">
         <td class="table-cell-maior">{{ ingrediente.nomeIngrediente }}</td>
-        <td class="table-cell">{{ ingrediente.precoIngrediente }}</td>
+        <td class="table-cell">{{ formatarPreco(ingrediente.precoIngrediente) }}</td>
         <td class="is-flex table-cell is-justify-content-flex-end" style="gap: 0.6rem;">
           <img class="icons" src="@/assets/icons/edit.svg" @click="openModal('editar')" style="width: 26px;" />
           <img class="icons" src="@/assets/icons/delete.svg" @click="openModal('excluir')" />
@@ -91,6 +91,7 @@
 import ingredienteService from '@/services/ingredienteService';
 import ButtonComponent from './ButtonComponent.vue';
 import ModalShortComponent from './ModalShortComponent.vue';
+import { formatarPreco } from '@/utils';
 
 export default {
   components: {
@@ -111,7 +112,7 @@ export default {
       nomeIngrediente: '',
       precoIngrediente: '',
       porcentagemDesconto: '',
-      tableData: []
+      ingredientes: []
     };
   },
   methods: {
@@ -152,16 +153,19 @@ export default {
         this.precoIngrediente = 0;
       }
     },
-    async carregarDados() {
+    async carregarIngredientes() {
       try {
-        this.tableData = await ingredienteService.obterTodos()
+        this.ingredientes = await ingredienteService.obterTodos()
       } catch (error) {
         console.error('Erro ao obter ingredientes:', error)
       }
-    }
+    },
+    formatarPreco(valor){
+      return formatarPreco(valor)
+    },
   },
   mounted() {
-    this.carregarDados();
+    this.carregarIngredientes();
   },
 }
 </script>
