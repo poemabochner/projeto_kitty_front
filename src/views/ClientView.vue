@@ -1,5 +1,5 @@
 <template>
-  <ToastComponent ref="toast" message="seja bem-vindo, $usuário!" />
+  <ToastComponent ref="toast" toastClass="toast is-flex p-5 tag is-primary is-light is-large" message="seja bem-vindo, cliente!"><img src="@/assets/icons/oktoast.svg" style="width: 24px;" /></ToastComponent>
   <div>
 
     <ModalComponent :isModalActive="isModalActive" title="faça seu pedido!" text="Total - R$:13,00"
