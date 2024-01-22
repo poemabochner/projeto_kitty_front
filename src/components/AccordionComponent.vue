@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     toggleAccordion() {
-      this.$emit('toggleAccordion');
+      this.$emit('toggleAccordion')
     },
   },
 };

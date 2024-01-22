@@ -183,8 +183,8 @@ export default {
     },
     validarNumero() {
       if (this.porcentagemDesconto < 0 || this.precoPromocao < 0) {
-        this.porcentagemDesconto = Math.max(this.porcentagemDesconto, 0);
-        this.precoPromocao = Math.max(this.precoPromocao, 0);
+        this.porcentagemDesconto = Math.max(this.porcentagemDesconto, 0)
+        this.precoPromocao = Math.max(this.precoPromocao, 0)
       }
     },
   },

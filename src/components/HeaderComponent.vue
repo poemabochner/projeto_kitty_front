@@ -20,31 +20,31 @@ export default {
 
   beforeUpdate() {
     this.$nextTick(() => {
-      this.addIconListeners();
-    });
+      this.addIconListeners()
+    })
   },
 
   methods: {
     addIconListeners() {
-      const iconElement = this.$refs.iconRef;
+      const iconElement = this.$refs.iconRef
       if (iconElement) {
-        iconExpand(iconElement);
+        iconExpand(iconElement)
       }
     },
 
     logout() {
-      localStorage.clear();
+      localStorage.clear()
 
-      this.$router.push('/login');
+      this.$router.push('/login')
     },
   },
 
   computed: {
     showHeader() {
-      return this.$route.meta.showHeader;
+      return this.$route.meta.showHeader
     },
   },
-};
+}
 </script>
 
 <style scoped>
