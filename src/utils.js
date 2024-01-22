@@ -7,3 +7,7 @@ export function iconExpand(element, expansionFactor = 1.2) {
     element.style.transform = 'scale(1)'
   })
 }
+
+export function formatarPreco(valor) {
+  return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
