@@ -31,7 +31,7 @@
                   lanche.nomeLanche }}</p>
               </div>
               <div>
-                <CounterComponent />
+                <CounterComponent @increment="adicionar" @decrement="subtrair"/>
               </div>
             </div>
           </div>
@@ -154,9 +154,11 @@ export default {
       nomePromocao: '',
       precoPromocao: '',
       porcentagemDesconto: '',
+      descricaoPromocao: '',
       promocoes: [],
       lanches: [],
       idPromocaoExcluir: null,
+      lanchesPromocao: []
     }
   },
   mounted() {
@@ -237,6 +239,13 @@ export default {
         console.error('Erro ao obter lanches:', error)
       }
     },
+    adicionar() {
+      console.log('adicionou')
+    },
+
+    subtrair() {
+      console.log('subtraiu')
+    }
   },
 }
 </script>
