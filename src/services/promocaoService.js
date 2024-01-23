@@ -5,9 +5,15 @@ const obterTodos = () => {
     .then((response) => response.data)
     .catch((error) => Promise.reject(error))
 }
+const cadastrar = (promocao) => {
+  return api.post('/api/promocao', promocao)
+      .then((response) => response.data)
+      .catch((error) => Promise.reject(error))
+}
+
 const deletar = (id) => {
   return api.delete(`/api/promocao/${id}`)
   .then((response) => response.data)
   .catch((error) => Promise.reject(error))
 }
-export default { obterTodos, deletar }
+export default { obterTodos, deletar, cadastrar }
