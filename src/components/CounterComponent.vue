@@ -16,10 +16,12 @@ export default {
   methods: {
     increment() {
       this.count += 1
+      this.$emit('increment')
     },
     decrement() {
       if (this.count > 0) {
         this.count -= 1
+        this.$emit('decrement')
       }
     },
   },
