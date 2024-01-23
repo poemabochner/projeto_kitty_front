@@ -5,5 +5,9 @@ const obterTodos = () => {
     .then((response) => response.data)
     .catch((error) => Promise.reject(error))
 }
-
-export default { obterTodos }
+const deletar = (id) => {
+  return api.delete(`/api/promocao/${id}`)
+  .then((response) => response.data)
+  .catch((error) => Promise.reject(error))
+}
+export default { obterTodos, deletar }
