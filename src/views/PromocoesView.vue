@@ -24,16 +24,17 @@
             <input class="input" v-model="descriçãoPromocao" placeholder="descrição" maxlength="255" />
           </div>
           <div class="">
-  <h3>lanches da promoção:</h3>
-  <div v-for="lanche in lanches" :key="lanche.id" class="is-flex is-justify-content-space-between">
-    <div class="is-flex is-align-items-center">
-      <p class="has-text-weight-regular is-size-5" style="flex-basis: 2; word-wrap: break-word;">{{ lanche.nomeLanche }}</p>
-    </div>
-    <div>
-      <CounterComponent />
-    </div>
-  </div>
-</div>
+            <h3>lanches da promoção:</h3>
+            <div v-for="lanche in lanches" :key="lanche.id" class="is-flex is-justify-content-space-between">
+              <div class="is-flex is-align-items-center">
+                <p class="has-text-weight-regular is-size-5" style="flex-basis: 2; word-wrap: break-word;">{{
+                  lanche.nomeLanche }}</p>
+              </div>
+              <div>
+                <CounterComponent />
+              </div>
+            </div>
+          </div>
           <div>
             <h3>preço da promoção:</h3>
             <input class="input" @input="validarNumero" type="number" v-model="precoPromocao" placeholder="preço" />
@@ -110,7 +111,7 @@
                 <p class="is-align-self-flex-end has-text-weight-bold p-4">{{ formatarPreco(promocao.precoPromocao) }}</p>
                 <div class="is-flex p-2 is-align-self-flex-end">
                   <img class="icons" src="@/assets/icons/edit.svg" @click="openModal('editar')" style="width: 26px;" />
-                  <img class="icons" src="@/assets/icons/delete.svg" @click="openModal('excluir')" />
+                  <img class="icons" src="@/assets/icons/delete.svg" @click="openModal('excluir', promocao)" />
                 </div>
               </div>
             </CardComponent>
@@ -154,7 +155,8 @@ export default {
       precoPromocao: '',
       porcentagemDesconto: '',
       promocoes: [],
-      lanches: []
+      lanches: [],
+      idPromocaoExcluir: null,
     }
   },
   mounted() {
@@ -169,12 +171,13 @@ export default {
         console.error('Erro ao obter lanches:', error)
       }
     },
-    openModal(type) {
+    openModal(type, promocao) {
       this.isModalActive = true
       this.modalType = type
 
-      if (type === 'excluir') {
-        this.modalTitle = `Deseja mesmo excluir a promoção ${this.nome}?`
+      if (type === 'excluir' && promocao && promocao.idPromocao) {
+        this.idPromocaoExcluir = promocao.idPromocao
+        this.modalTitle = `Deseja mesmo excluir a promoção ${promocao.nomePromocao}?`
       } else if (type === 'adicionar') {
         this.modalTitle = 'Adicionar Promoção'
       } else if (type === 'editar') {
@@ -189,8 +192,26 @@ export default {
       this.closeModal()
     },
     excluir() {
-      console.log('Ingrediente excluído:', this.nome)
-      this.closeModal()
+      if (this.modalType === 'excluir') {
+        const idPromocao = this.idPromocaoExcluir
+        if (!idPromocao) {
+          alert('ID da promoção a ser excluída não encontrado.')
+          return
+        }
+        promocaoService.deletar(idPromocao)
+          .then(() => {
+            this.promocoes = this.promocoes.filter(promocao => promocao.id !== idPromocao)
+            this.carregarPromocoes()
+            alert(`Promoção excluída com sucesso!`)
+          })
+          .catch((error) => {
+            alert(error.message)
+          })
+          .finally(() => {
+            this.closeModal()
+            this.idPromocaoExcluir = null
+          })
+      }
     },
     salvar() {
       console.log('Promoção salva:', {
