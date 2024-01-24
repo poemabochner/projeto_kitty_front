@@ -3,7 +3,7 @@
     message="seja bem-vindo, cliente!"><img src="@/assets/icons/oktoast.svg" style="width: 24px;" /></ToastComponent>
   <div>
 
-    <ModalComponent :isModalActive="isModalActive" title="faça seu pedido!" text="Total - R$:13,00"
+    <ModalComponent :isModalActive="isModalActive" title="faça seu pedido!" :text="`Total - ${formatarPreco(totalTotal)}`"
       @closeModal="closeModal">
       <img src="@/assets/icons/hotdog.svg" />
       <template v-slot:content>
@@ -19,9 +19,12 @@
               </div>
               <p class="has-text-weight-semibold is-size-5">{{ formatarPreco(lanche.precoLanche) }}</p>
               <p>
-                <CounterComponent />
+                <CounterComponent @increment="adicionarLanche(lanche.precoLanche)"
+                  @decrement="subtrairLanche(lanche.precoLanche)" />
               </p>
             </div>
+            <hr style="background-color: var(--branco);">
+            <p class="is-flex has-text-weight-medium">total dos lanches: {{ formatarPreco(totalLanche) }} </p>
           </AccordionComponent>
 
           <AccordionComponent :is-expanded="accordionState.promocao" title="nossas promoções:"
@@ -34,9 +37,12 @@
               </div>
               <p class="has-text-weight-semibold is-size-5">{{ formatarPreco(promocao.precoPromocao) }}</p>
               <p>
-                <CounterComponent />
+                <CounterComponent @increment="adicionarPromocao(promocao.precoPromocao)"
+                  @decrement="subtrairPromocao(promocao.precoPromocao)" />
               </p>
             </div>
+            <hr style="background-color: var(--branco);">
+            <p class="is-flex has-text-weight-medium">total das promoções: {{ formatarPreco(totalPromocao) }} </p>
           </AccordionComponent>
 
           <AccordionComponent :is-expanded="accordionState.monteSeuLanche" title="monte seu lanche:"
@@ -49,9 +55,12 @@
               </div>
               <p class="has-text-weight-semibold is-size-5">{{ formatarPreco(ingrediente.precoIngrediente) }}</p>
               <p>
-                <CounterComponent />
+                <CounterComponent @increment="adicionarIngrediente(ingrediente.precoIngrediente)"
+                  @decrement="subtrairIngrediente(ingrediente.precoIngrediente)" />
               </p>
             </div>
+            <hr style="background-color: var(--branco);">
+            <p class="is-flex has-text-weight-medium">total do lanche montado: {{ formatarPreco(totalMonteSeuLanche) }} </p>
           </AccordionComponent>
 
         </div>
@@ -63,10 +72,10 @@
             style="border-radius: 0px 0px 10px 10px;" src="@/assets/images/lanche.jpg" />
         </CardComponent>
         <CardComponent class="card" texto="nossas promoções!" @click="openModal('promocao')"><img
-            src="@/assets/images/promocao.png" style="border-radius: 0px 0px 10px 10px;"/>
+            src="@/assets/images/promocao.png" style="border-radius: 0px 0px 10px 10px;" />
         </CardComponent>
         <CardComponent class="card" texto="monte seu lanche!" @click="openModal('monteSeuLanche')"><img
-            src="@/assets/images/ingredientes.jpg" style="border-radius: 0px 0px 10px 10px;"/></CardComponent>
+            src="@/assets/images/ingredientes.jpg" style="border-radius: 0px 0px 10px 10px;" /></CardComponent>
       </div>
     </div>
   </div>
@@ -103,10 +112,19 @@ export default {
       },
       lanches: [],
       promocoes: [],
+      selectedLanche: null,
+      totalMonteSeuLanche: 0,
+      totalPromocao: 0,
+      totalLanche: 0,
+    }
+  },
+  computed: {
+    totalTotal() {
+      return this.totalMonteSeuLanche + this.totalPromocao + this.totalLanche
     }
   },
   methods: {
-    formatarPreco(valor){
+    formatarPreco(valor) {
       return formatarPreco(valor)
     },
     async carregarPromocoes() {
@@ -119,6 +137,9 @@ export default {
     openModal(type) {
       this.isModalActive = true
       this.modalType = type
+      this.totalMonteSeuLanche = 0
+      this.totalPromocao = 0
+      this.totalLanche = 0
       Object.keys(this.accordionState).forEach(key => {
         this.accordionState[key] = false
       })
@@ -145,6 +166,29 @@ export default {
         console.error('Erro ao obter lanches:', error)
       }
     },
+
+    adicionarIngrediente(preco) {
+      this.totalMonteSeuLanche += preco
+    },
+
+    subtrairIngrediente(preco) {
+      this.totalMonteSeuLanche -= preco
+    },
+    adicionarPromocao(preco) {
+      this.totalPromocao += preco
+    },
+
+    subtrairPromocao(preco) {
+      this.totalPromocao -= preco
+    },
+    adicionarLanche(preco) {
+      this.totalLanche += preco
+    },
+
+    subtrairLanche(preco) {
+      this.totalLanche -= preco
+    }
+
   },
   mounted() {
     this.carregarIngredientes()
