@@ -21,7 +21,7 @@
           </div>
           <div class="">
             <h3>descrição da promoção:</h3>
-            <input class="input" v-model="descriçãoPromocao" placeholder="descrição" maxlength="255" />
+            <input class="input" v-model="descricaoPromocao" placeholder="descrição" maxlength="255" />
           </div>
           <div class="">
             <h3>lanches da promoção:</h3>
@@ -31,7 +31,7 @@
                   lanche.nomeLanche }}</p>
               </div>
               <div>
-                <CounterComponent @increment="adicionar" @decrement="subtrair"/>
+                <CounterComponent @increment="adicionar(lanche.idLanche)" @decrement="subtrair(lanche.idLanche)" />
               </div>
             </div>
           </div>
@@ -46,7 +46,8 @@
           </div>
 
           <div class="is-flex" style="gap: 1rem;">
-            <ButtonComponent textoBotao="salvar" @click="salvar"><img src="@/assets/icons/check.svg" /></ButtonComponent>
+            <ButtonComponent textoBotao="salvar" @click="salvarPromocao"><img src="@/assets/icons/check.svg" />
+            </ButtonComponent>
             <ButtonComponent textoBotao="cancelar" @click="cancelar"><img src="@/assets/icons/close.svg" />
             </ButtonComponent>
           </div>
@@ -54,7 +55,7 @@
       </template>
     </ModalShortComponent>
 
-    <ModalShortComponent v-else-if="modalType === 'editar'" :isModalActive="isModalActive" :title="modalTitle"
+    <ModalShortComponent  v-else-if="modalType === 'editar'" :isModalActive="isModalActive" :title="modalTitle"
       @closeModal="closeModal">
       <template v-slot:content>
         <div class="p-2 is-size-2 is-flex is-flex-direction-column" style="gap: 1rem;">
@@ -64,17 +65,20 @@
           </div>
           <div class="">
             <h3>descrição da promoção:</h3>
-            <input class="input" v-model="descriçãoPromocao" placeholder="descrição" maxlength="255" />
+            <input class="input" v-model="descricaoPromocao" placeholder="descrição" maxlength="255" />
           </div>
           <div class="">
             <h3>lanches da promoção:</h3>
-            <div class="is-flex is-justify-content-space-between">
-              <p class="has-text-weight-regular is-size-5">completo com linguiça</p>
-              <p>
-                <CounterComponent />
-              </p>
+            <div v-for="lanche in lanches" :key="lanche.id" class="is-flex is-justify-content-space-between">
+              <div class="is-flex is-align-items-center">
+                <p class="has-text-weight-regular is-size-5" style="flex-basis: 2; word-wrap: break-word;">{{
+                  lanche.nomeLanche }}</p>
+              </div>
+              <div>
+                <CounterComponent @increment="adicionar(lanche.idLanche)" @decrement="subtrair(lanche.idLanche)" />
+              </div>
             </div>
-          </div>
+            </div>
           <div>
             <h3>preço da promoção:</h3>
             <input class="input" @input="validarNumero" type="number" v-model="precoPromocao" placeholder="preço" />
@@ -86,7 +90,7 @@
           </div>
 
           <div class="is-flex" style="gap: 1rem;">
-            <ButtonComponent textoBotao="salvar" @click="salvar"><img src="@/assets/icons/check.svg" /></ButtonComponent>
+            <ButtonComponent textoBotao="salvar" @click="salvarPromocao"><img src="@/assets/icons/check.svg" /></ButtonComponent>
             <ButtonComponent textoBotao="cancelar" @click="cancelar"><img src="@/assets/icons/close.svg" />
             </ButtonComponent>
           </div>
@@ -110,7 +114,7 @@
                 </p>
                 <p class="is-align-self-flex-end has-text-weight-bold p-4">{{ formatarPreco(promocao.precoPromocao) }}</p>
                 <div class="is-flex p-2 is-align-self-flex-end">
-                  <img class="icons" src="@/assets/icons/edit.svg" @click="openModal('editar')" style="width: 26px;" />
+                  <img class="icons" src="@/assets/icons/edit.svg" @click="openModal('editar', promocao)" style="width: 26px;" />
                   <img class="icons" src="@/assets/icons/delete.svg" @click="openModal('excluir', promocao)" />
                 </div>
               </div>
@@ -158,7 +162,9 @@ export default {
       promocoes: [],
       lanches: [],
       idPromocaoExcluir: null,
-      lanchesPromocao: []
+      idPromocaoEditar: null,
+      lanchesPromocao: [],
+      contadorLanches: {}
     }
   },
   mounted() {
@@ -182,9 +188,31 @@ export default {
         this.modalTitle = `Deseja mesmo excluir a promoção ${promocao.nomePromocao}?`
       } else if (type === 'adicionar') {
         this.modalTitle = 'Adicionar Promoção'
+        this.lanchesPromocao = []
+        this.nomePromocao = ''
+        this.precoPromocao = ''
+        this.porcentagemDesconto = ''
+        this.descricaoPromocao = ''
       } else if (type === 'editar') {
+        this.idPromocaoEditar = promocao.idPromocao
+        this.nomePromocao = promocao.nomePromocao
+        this.descricaoPromocao = promocao.descricaoPromocao
+        this.precoPromocao = promocao.precoPromocao
+        this.porcentagemDesconto = promocao.descontoPromocao
+        this.lanchesPromocao = []
         this.modalTitle = 'Editar Promoção'
+        this.contarLanches()
       }
+    },
+
+    contarLanches() {
+      this.lanchesPromocao.forEach((lanche) => {
+        const id = lanche.idLanche
+
+        this.contadorLanches[id] = (this.contadorLanches[id] || 0) + 1
+      })
+
+      console.log(this.contadorLanches)
     },
     closeModal() {
       this.isModalActive = false
@@ -215,14 +243,58 @@ export default {
           })
       }
     },
-    salvar() {
-      console.log('Promoção salva:', {
-        nome: this.nomePromocao,
-        preco: this.precoPromocao,
-        porcentagemDesconto: this.porcentagemDesconto,
-      })
+    salvarPromocao() {
+      if (!this.nomePromocao || !this.descricaoPromocao || this.lanchesPromocao.length == 0) {
+        alert('Por favor, preencha todos os campos.')
+        return
+      }
+
+      const novaPromocao = {
+        idPromocao: null,
+        nomePromocao: this.nomePromocao,
+        precoPromocao: this.precoPromocao,
+        descricaoPromocao: this.descricaoPromocao,
+        descontoPromocao: this.porcentagemDesconto,
+        lanches: this.lanchesPromocao.map(lancheId => ({ idLanche: lancheId }))
+      }
+      if (this.modalType === 'adicionar') {
+        this.cadastrar(novaPromocao)
+      } else {
+        novaPromocao.idPromocao = this.idPromocaoEditar
+        this.atualizar(novaPromocao)
+      }
+
+    },
+
+    cadastrar(promocao) {
+      promocaoService.cadastrar(promocao)
+        .then(() => {
+          this.carregarPromocoes()
+          alert(`promoção ${this.nomePromocao} cadastrada com sucesso!`)
+
+        })
+        .catch((error) => {
+
+          alert('Erro ao cadastrar promoção', error)
+        })
+
       this.closeModal()
     },
+
+    atualizar(promocao) {
+      promocaoService.atualizar(promocao)
+        .then(() => {
+          this.carregarPromocoes()
+          alert(`Promoção ${this.nomePromocao} editada com sucesso!`)
+        })
+        .catch((error) => {
+
+          alert('Erro ao editar promoção', error)
+        })
+
+      this.closeModal()
+    },
+
     validarNumero() {
       if (this.porcentagemDesconto < 0 || this.precoPromocao < 0) {
         this.porcentagemDesconto = Math.max(this.porcentagemDesconto, 0)
@@ -239,12 +311,19 @@ export default {
         console.error('Erro ao obter lanches:', error)
       }
     },
-    adicionar() {
-      console.log('adicionou')
+    adicionar(idLanche) {
+      this.lanchesPromocao.push(idLanche)
     },
 
-    subtrair() {
-      console.log('subtraiu')
+    subtrair(idLanche) {
+      for (var idLanchePromocao of this.lanchesPromocao) {
+        if (idLanchePromocao == idLanche) {
+          var index = this.lanchesPromocao.indexOf(idLanchePromocao)
+          this.lanchesPromocao.splice(index, 1)
+          return
+        }
+      }
+
     }
   },
 }
