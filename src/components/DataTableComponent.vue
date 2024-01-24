@@ -72,7 +72,7 @@
     </thead>
     <tbody class="is-flex is-flex-direction-column table-container">
 
-      <tr class="is-flex table-row" v-for="(ingrediente, index) in ingredientes" :key="ingrediente.id"
+      <tr class="is-flex table-row is-justify-content-space-between" v-for="(ingrediente, index) in ingredientes" :key="ingrediente.id"
         :class="{ 'linha-par': index % 2 === 0, 'linha-impar': index % 2 !== 0 }">
         <td class="table-cell-maior">{{ ingrediente.nomeIngrediente }}</td>
         <td class="table-cell">{{ formatarPreco(ingrediente.precoIngrediente) }}</td>
@@ -250,15 +250,8 @@ table {
 }
 
 .table-container {
-  display: flex;
-  flex-direction: column;
   align-items: stretch;
   width: 100%;
-}
-
-.table-row {
-  display: flex;
-  justify-content: space-between;
 }
 
 .table-cell-maior {

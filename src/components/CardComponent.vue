@@ -1,6 +1,6 @@
 <template>
   <div class="card has-text-weight-semibold has-text-centered my-5" style="border-radius: 12px;">
-    <div class="card__texto p-4" style="background-color: var(--cor-hover); height: 35%;">
+    <div class="card__texto is-flex is-flex-direction-column is-align-items-center is-justify-content-center p-4" style="background-color: var(--cor-hover); height: 35%;">
       <h1 class="has-text-weight-semibold">{{ texto }}</h1>
     </div>
     <div>
@@ -27,10 +27,6 @@ export default {
 }
 
 .card__texto {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   border-radius: 10px 10px 0 0;
 }
 

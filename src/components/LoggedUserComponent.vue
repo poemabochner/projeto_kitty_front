@@ -10,7 +10,7 @@ export default {
   name: 'LoggedUserComponent',
   computed: {
     user() {
-      const currentPath = this.$route.path;
+      const currentPath = this.$route.path
 
       if (currentPath.includes('/cliente')) {
         return 'cliente'
