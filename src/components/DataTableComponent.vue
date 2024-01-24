@@ -228,7 +228,7 @@ export default {
         .catch((error) => {
           this.ingredientes.pop()
 
-          alert('Erro ao cadastrar ingrediente', error)
+          alert('Já existe um ingrediente com esse nome!', error)
         })
 
       this.closeModal()
