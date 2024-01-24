@@ -182,13 +182,6 @@ export default {
           })
       }
     },
-    salvar() {
-      console.log('Ingrediente salvo:', {
-        nome: this.nomeIngrediente,
-        preco: this.precoIngrediente,
-      })
-      this.closeModal()
-    },
 
     validarNumero() {
       if (this.precoIngrediente < 0) {
