@@ -52,6 +52,7 @@ export default {
   right: 100px;
   z-index: 9999;
   animation: fadeInOut 1.5s forwards;
+  border-left: 8px solid rgb(14, 167, 14);
 }
 
 .fade-enter-active,

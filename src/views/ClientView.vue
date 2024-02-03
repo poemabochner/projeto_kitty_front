@@ -1,5 +1,5 @@
 <template>
-  <ToastComponent ref="toast" toastClass="toast is-flex p-5 tag is-primary is-light is-large"
+  <ToastComponent ref="toast"
     message="seja bem-vindo, cliente!"><img src="@/assets/icons/oktoast.svg" style="width: 24px;" /></ToastComponent>
   <div>
 
